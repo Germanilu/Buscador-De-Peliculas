@@ -112,7 +112,6 @@ authController.login = async (req,res) => {
             );
         }
 
-
        //aqui creo mi jsonwebtoken
        // el primer argumento de jwt.sing es la info que quiero que el token almacene en este caso el user id y el user role
        //el secreto sirve para q cuanod accedo la firma sea valida en este caso lo he escondido en el .env en JWT_SECRET
@@ -137,8 +136,6 @@ authController.login = async (req,res) => {
         )
     }
 }
-
-
 
 // Metodo para revisar el perfil
 authController.profile = async (req,res) => {

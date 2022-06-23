@@ -1,7 +1,6 @@
 //Me llevo los modelos de User
 const User = require("../models/User");
 
-
 //Constante userController con objeto
 const userController = {};
 
@@ -18,7 +17,6 @@ userController.getAll = async (req,res) => {
             }
         );
     } catch (error) {
-
         return res.status(500).json(  // mi devolucion va a ser de tipo json 
             {
                 success: false,  // Esto sera que ha ido mal
@@ -60,9 +58,7 @@ userController.getUserById = async(req,res) => {
         }
     )
     } catch (error) {
-
         if(error?.message.includes('Cast to ObjectId failed')){
-            
             return res.status(404).json(
                 {
                     success: true,
@@ -71,7 +67,6 @@ userController.getUserById = async(req,res) => {
                 }
             );
         }
-
         return res.status(500).json(
             {
                 success: false,
@@ -87,26 +82,14 @@ userController.getUserById = async(req,res) => {
 //Metodo DELETE BY ID
 userController.deleteById = async(req,res) => {
 
-    const {id} = req.params;
-
-    //Condicion si el usuario intenta borrar un usuario que no sea el mismo no funcionarà
-    // Y ademas, condicion que un superAdmin puede borrar lo que le da la gana.
-    if(id !== req.user_id && req.user_role !== "super_admin"){
-        return res.status(404).json(
-            {
-                success: false,
-                message: "Unable to delete user"
-            }
-        );
-    }
 
     try {
+        const {id} = req.params;
         await User.findByIdAndDelete(id)
         return res.status(200).json(
             {
                 success: true,
                 message: "User deleted",
-                
             }
         )
     } catch (error) {
@@ -121,25 +104,20 @@ userController.deleteById = async(req,res) => {
 }
 
 
-
 //METODO UPDATE
 userController.update = async (req,res) => {
     try {
-
         const {id} = req.params;
-
         if(req.body.name === ""){
             return res.status(400).json(
                 {
                     success: false,
-                    message: "Unable to update, missing data "
-                    
+                    message: "Unable to update, missing data " 
                 }
             )
         }
 
         const {name,email,password} = req.body
-
         const updateUser = {
             name,
             email,
@@ -168,4 +146,3 @@ userController.update = async (req,res) => {
 //Exporto userController
 module.exports = userController
 
-//Bienvenidos
