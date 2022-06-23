@@ -42,6 +42,3 @@ const User = mongoose.model('User',UserSchema);
 //exporto el modelo
 module.exports = User;
 
-
-
-//IBRA ESPAVILA
