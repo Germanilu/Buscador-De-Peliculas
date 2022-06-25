@@ -58,7 +58,6 @@ movieController.getMovieById = async(req,res) => {
             }
         )
 
-        
     } catch (error) {
 
         if(error?.message.includes('Cast to ObjectId failed')){
@@ -71,12 +70,49 @@ movieController.getMovieById = async(req,res) => {
             );
         }
 
-
         return res.status(500).json(
             {
                 success: false,
                 message: 'Error retrieving movie',
                 error: error?.message || error
+            }
+        )
+    }
+}
+
+
+//Get movie by Title
+
+movieController.getMovieByTitle = async (req,res) => {
+    try {
+        const {name} = req.body;
+        
+        const movie = await Movie.findOne({name})
+
+        if(!movie){
+            return res.status(404).json(
+                {
+                    success: false,
+                    message: "Movie NOooooT Found"
+                    
+                }
+            )
+        }
+
+        return res.status(200).json(
+            {
+                success: true,
+                message: "Movie Found",
+                data: movie
+            }
+        )
+
+    } catch (error) {
+        return res.status(404).json(
+            {
+                success: false,
+                message: "Movie NOT Found"
+                
             }
         )
     }

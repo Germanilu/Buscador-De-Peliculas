@@ -6,8 +6,10 @@ const router = require('express').Router();
 
 //Create movie.
 router.post('/movie', movieController.create)
-
+//Get movie by Id
 router.get('/movie/:id',movieController.getMovieById)
+//Get movie by Title
+router.get('/movie',movieController.getMovieByTitle)
 
 
 module.exports = router;
