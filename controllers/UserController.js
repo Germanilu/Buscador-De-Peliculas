@@ -12,7 +12,7 @@ userController.getAll = async (req,res) => {
         return res.status(200).json(  // mi devolucion va a ser de tipo json 
             {
                 success: true,  // Esto sera que ha ido bien
-                message: 'Get all users retrieved succsessfully', // Este sera el mensaje
+                message: 'All users retrieved succsessfully', // Este sera el mensaje
                 data: users // Esta es la info users
             }
         );

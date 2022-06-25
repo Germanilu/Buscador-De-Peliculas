@@ -1,7 +1,5 @@
-
 // Requiero express para las rutas
 const router = require('express').Router()
-
 //Me llevo los controllers
 const userController = require('../controllers/UserController');
 
@@ -12,11 +10,12 @@ const verifyToken = require('../middlewares/verifyToken');
 
 
 //Todas las rutas tienen verifyToken para que se verifique que el usuario existe y esta registrado
-//Ruta para buscar todos los usuarios
+
+//Ruta para buscar todos los usuarios (solo puede hacerlo un super_admin)
 router.get('/users', verifyToken, isSuperAdmin, userController.getAll);  
 
 // Ruta para buscar un usuario por Id
-router.get('/users/:id', verifyToken, isSuperAdmin, userController.getUserById); 
+router.get('/users/:id', verifyToken, userController.getUserById); 
 
 //Ruta para borrar el usuario pasando el Id por url
 router.delete('/users/:id',verifyToken,  userController.deleteById);
