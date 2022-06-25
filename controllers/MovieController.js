@@ -93,7 +93,7 @@ movieController.getMovieByTitle = async (req,res) => {
             return res.status(404).json(
                 {
                     success: false,
-                    message: "Movie NOooooT Found"
+                    message: "Movie NOT Found"
                     
                 }
             )
