@@ -82,9 +82,19 @@ userController.getUserById = async(req,res) => {
 //Metodo DELETE BY ID
 userController.deleteById = async(req,res) => {
 
-
     try {
         const {id} = req.params;
+
+        //Condicion para que el usuario pueda borrar solo su perfil 
+        if(id !== req.user_id ){
+            return res.status(200).json(
+                {
+                    success: true,
+                    message: "Unable to delet user, user not found",
+                }
+            )            
+        }
+
         await User.findByIdAndDelete(id)
         return res.status(200).json(
             {
