@@ -11,6 +11,8 @@ const userRoutes = require('./routes/user.routes')
 // Conexion con auth routes 
 const authRoutes = require('./routes/auth.routes'); 
 
+const movieRoutes = require('./routes/movie.routes')
+
 //conecto express a mi const app
 const app = express(); 
 
@@ -26,6 +28,8 @@ const port = process.env.PORT || 4000;
 app.use('/api', userRoutes)  
 // Conecto con auth.routes 
 app.use('/api', authRoutes)  
+
+app.use('/api', movieRoutes)
 
 //ruta de bienvenida
 app.get('/' , (req,res) => {   // Primera ruta creada 
