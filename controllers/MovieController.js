@@ -119,5 +119,27 @@ movieController.getMovieByTitle = async (req,res) => {
 }
 
 
+//Get all movie
+movieController.getAll = async (req,res) => {
+    try {
+        const movie = await Movie.find()
+        return res.status(200).json(
+            {
+                success: true,
+                message: 'All movie retrieved succsessfully',
+                data: movie
+            }
+        )
+    } catch (error) {
+        return res.status(500).json(
+            {
+                success: false,
+                message: 'Error retriving movies',
+                error: error.message
+            }
+        )
+    }
+}
+
 //Export movieController
 module.exports= movieController
