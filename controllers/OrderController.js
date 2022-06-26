@@ -14,16 +14,21 @@ orderController.create = async(req,res) => {
         //Espero a que se encuentre la pelicula
        const movie = await Movie.findById(id)
         //Creo un nuevo pedido
-       const newOrder = {
+
+        //Per poterlo vedere in compass
+        movieName = movie.name
+       
+        const newOrder = {
         userId,
-        movie
+        movie,
+        movieName
     }
         await Order.create(newOrder)
         return res.status(200).json(
             {
                 success: true,
                 message: "Order created.",
-                data: newOrder
+                data: userId , movie
             }
         )
     } catch (error) {

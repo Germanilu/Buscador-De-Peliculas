@@ -11,7 +11,9 @@ const orderSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
         required: true
-        
+    },
+    movieName: {
+        type: String //Para que se vea en compass, sgro hay otra manera d hacrlo
     },
     returnDate: {
         type: Date,
