@@ -10,8 +10,11 @@ const db = require('./config/database');
 const userRoutes = require('./routes/user.routes') 
 // Conexion con auth routes 
 const authRoutes = require('./routes/auth.routes'); 
+//Conexion con movie routes
+const movieRoutes = require('./routes/movie.routes');
+//Conexion con order routes
+const orderRoutes = require('./routes/order.routes');
 
-const movieRoutes = require('./routes/movie.routes')
 
 //conecto express a mi const app
 const app = express(); 
@@ -28,8 +31,10 @@ const port = process.env.PORT || 4000;
 app.use('/api', userRoutes)  
 // Conecto con auth.routes 
 app.use('/api', authRoutes)  
-
+// Conecto con movie.routes
 app.use('/api', movieRoutes)
+// Conecto con order.routes
+app.use('/api', orderRoutes)
 
 //ruta de bienvenida
 app.get('/' , (req,res) => {   // Primera ruta creada 
