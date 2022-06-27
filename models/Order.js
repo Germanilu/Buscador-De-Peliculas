@@ -18,7 +18,12 @@ const orderSchema = new mongoose.Schema({
     returnDate: {
         type: Date,
         default: +new Date() + 7*24*60*60*1000 // Para que la fecha de retorno sea 7 dias despues
+    },
+    haveOrder: {
+        type: Boolean,
+        default: false
     }
+
 })
 
 const Order = mongoose.model('Order',orderSchema);
