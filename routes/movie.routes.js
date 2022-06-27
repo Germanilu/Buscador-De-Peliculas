@@ -12,6 +12,8 @@ router.get('/movie/id=:id',movieController.getMovieById)
 router.get('/movie/',movieController.getMovieByTitle)
 //Get all movie
 router.get('/movie/all', movieController.getAll)
+//Filter movie by genre
+router.get('/movie/genre', movieController.getByGenre)
 
 //Exportamos router.
 module.exports = router;
