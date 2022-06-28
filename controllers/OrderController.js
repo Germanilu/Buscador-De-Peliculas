@@ -23,20 +23,42 @@ orderController.create = async(req,res) => {
         movieName
     }
 
-        //User can only order 1 movie at time.
-        const order = await Order.find()
-        const haveAlready = order.filter(i => i.haveOrder === false);
-        if(haveAlready.length != ""){
-            return res.status(404).json(
-            
+      
+        //Logic if user already Order 1 movie.
+        const order = await Order.find({userId})
+
+        if(order.length > 0){
+            return res.status(400).json(
                 {
                     success: false,
-                    message: "User already ordered a film",
-                    data: haveAlready
+                    message: 'Unable to place the Order',
                 }
             )
         }
- 
+
+
+
+        // order.forEach(i => {
+        //     if(i.userId == userId){
+        //         return res.status(500).json(
+        //             {
+        //                 success: false,
+        //                 message: 'Unable to place the Order, User already have 1 pending Order.',
+        //             }
+        //         )
+        //     }
+        // })
+
+        // if(alreadyOrder){
+        //     return res.status(500).json(
+        //         {
+        //             success: false,
+        //             message: 'Unable to place the Order, User already have 1 pending Order.',
+        //         }
+        //     )
+        // }
+        
+
        await Order.create(newOrder)
 
         return res.status(200).json(
