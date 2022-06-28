@@ -49,6 +49,17 @@ app.get('*', (req,res) => {
 
 
 
+//Cors
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+//     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+//     res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+//     next();
+// });
+//Puede q haga falta instalar npm cors 
+
+
 // Ejecuto db para que funcione database.js
 db().then(() => {
 

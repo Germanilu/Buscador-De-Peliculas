@@ -217,5 +217,54 @@ movieController.getAll = async (req,res) => {
     }
 }
 
+// Filtrar por genre
+
+movieController.getByGenre = async(req,res) => {
+    try {
+
+        const {genre} = req.body;
+        
+        const movie = await Movie.find({genre})
+        
+                        
+              
+        if(!genre){
+            return res.status(404).json(
+                
+                {
+                    success: false,
+                    message: "Movie NOT Found by genre",                  
+                }
+            )
+        }    
+                
+        // generos.forEach(i =>{
+        //     if(genre != i){
+        //         return res.status(404).json({
+        //             success: false,
+        //             message: "Genre doesn't exist",
+        //         })
+        //     }
+        // })
+
+        return res.status(200).json(
+            {
+                success: true,
+                message: "Movie Found by genre",
+                data: movie                
+            }
+        )
+        
+    } catch (error) {
+        return res.status(500).json(
+            {
+                success: false,
+                message: 'Error retriving Genre',
+                error: error.message
+            }
+        )
+    }
+}
+
 //Export movieController
 module.exports= movieController
