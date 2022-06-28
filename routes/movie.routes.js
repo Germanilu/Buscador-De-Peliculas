@@ -12,6 +12,10 @@ router.get('/movie/id=:id',movieController.getMovieById)
 router.get('/movie/',movieController.getMovieByTitle)
 //Get all movie
 router.get('/movie/all', movieController.getAll)
+//get by Director
+router.get('/movie/director',movieController.getMovieByDirector)
+//get by Actor
+router.get('/movie/actors',movieController.getMovieByActor)
 
 //Exportamos router.
 module.exports = router;

@@ -37,6 +37,7 @@ movieController.create = async (req,res) => {
 //Get Movie By Id
 movieController.getMovieById = async(req,res) => {
     try {
+       
         const {id} = req.params;
         const movie = await Movie.findById(id)
 
@@ -117,6 +118,81 @@ movieController.getMovieByTitle = async (req,res) => {
         )
     }
 }
+//Get movie by Director
+
+movieController.getMovieByDirector = async (req,res) => {
+    try {
+        let director = req.query.director;
+      
+        const movie = await Movie.find({director});
+   
+
+        if(!movie){
+            return res.status(404).json(
+                {
+                    success: false,
+                    message: "Director NOT Found"
+                    
+                }
+            )
+        }
+
+        return res.status(200).json(
+            {
+                success: true,
+                message: "Director Found",
+                data: movie
+            }
+        )
+
+    } catch (error) {
+        return res.status(500).json(
+            {
+                success: false,
+                message: "Error retrieving movie whith director"
+                
+            }
+        )
+    }
+}
+//Get movie by Actor
+// TODAVIA NO FUNCIONA , SEGUIR TRABAJANDO EN EL!
+movieController.getMovieByActor = async (req,res) => {
+    try {
+        let actors = req.query.actors;
+      
+        const movie = await Movie.find({actors});
+   
+
+        if(!movie){
+            return res.status(404).json(
+                {
+                    success: false,
+                    message: "Actor NOT Found"
+                    
+                }
+            )
+        }
+
+        return res.status(200).json(
+            {
+                success: true,
+                message: "Actor Found",
+                data: movie
+            }
+        )
+
+    } catch (error) {
+        return res.status(500).json(
+            {
+                success: false,
+                message: "Error retrieving movie whith actor"
+                
+            }
+        )
+    }
+}
+
 
 
 //Get all movie
