@@ -19,7 +19,9 @@ const movieSchema = new mongoose.Schema({
     },
     actors: {
         type: String,
-        required: true
+        required: true,
+        enum: ['Keanu Reeves', 'actor1','bratt bird'],
+        default: '' 
     },
     year: {
         type: Number,
