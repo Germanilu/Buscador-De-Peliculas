@@ -150,19 +150,19 @@ movieController.getByGenre = async(req,res) => {
         
         const movie = await Movie.find({genre})
         console.log(movie);
+                        
               
         if(!genre){
             return res.status(404).json(
+                
                 {
                     success: false,
                     message: "Movie NOT Found by genre",
                                        
                 }
             )
-        }
-        
-
-        // const generos =  ["adventure", "fantasy", "action", "terror"]
+        }    
+                
         // generos.forEach(i =>{
         //     if(genre != i){
         //         return res.status(404).json({

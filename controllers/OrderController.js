@@ -52,4 +52,25 @@ orderController.create = async(req,res) => {
     }
 }
 
+orderController.getAll = async (req,res) => {
+    try {
+        const pedido = await Order.find()
+        return res.status(200).json(
+            {
+                success: true,
+                message: 'All orders retrieved succsessfully',
+                data: pedido
+            }
+        )
+    } catch (error) {
+        return res.status(500).json(
+            {
+                success: false,
+                message: 'Error retriving all orders',
+                error: error.message
+            }
+        )
+    }
+}
+
 module.exports= orderController
