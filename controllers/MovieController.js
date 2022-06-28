@@ -149,7 +149,7 @@ movieController.getByGenre = async(req,res) => {
         const {genre} = req.body;
         
         const movie = await Movie.find({genre})
-        console.log(movie);
+        
                         
               
         if(!genre){
@@ -157,8 +157,7 @@ movieController.getByGenre = async(req,res) => {
                 
                 {
                     success: false,
-                    message: "Movie NOT Found by genre",
-                                       
+                    message: "Movie NOT Found by genre",                  
                 }
             )
         }    
