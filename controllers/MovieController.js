@@ -225,8 +225,6 @@ movieController.getByGenre = async(req,res) => {
         const {genre} = req.body;
         
         const movie = await Movie.find({genre})
-        
-                        
               
         if(!genre){
             return res.status(404).json(

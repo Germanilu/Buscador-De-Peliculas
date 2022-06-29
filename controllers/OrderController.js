@@ -27,6 +27,10 @@ orderController.create = async(req,res) => {
         //Logic if user already Order 1 movie.
         const order = await Order.find({userId})
 
+        //Saco la fecha de hoy
+        const movieDate = new Date
+
+        
         if(order.length > 0){
             return res.status(400).json(
                 {
@@ -36,29 +40,7 @@ orderController.create = async(req,res) => {
             )
         }
 
-
-
-        // order.forEach(i => {
-        //     if(i.userId == userId){
-        //         return res.status(500).json(
-        //             {
-        //                 success: false,
-        //                 message: 'Unable to place the Order, User already have 1 pending Order.',
-        //             }
-        //         )
-        //     }
-        // })
-
-        // if(alreadyOrder){
-        //     return res.status(500).json(
-        //         {
-        //             success: false,
-        //             message: 'Unable to place the Order, User already have 1 pending Order.',
-        //         }
-        //     )
-        // }
-        
-
+        //Creacion Nueva Orden
        await Order.create(newOrder)
 
         return res.status(200).json(
