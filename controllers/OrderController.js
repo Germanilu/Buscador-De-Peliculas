@@ -94,5 +94,44 @@ orderController.getAll = async (req,res) => {
         )
     }
 }
+
+
+
+orderController.getbyUserId = async (req,res) => {
+    try {
+        const {userId} = req.body;
+
+        const pedido = await Order.find({userId});
+        
+        if(!userId || pedido.length ===0 || !pedido){
+            return res.status(404).json(
+                
+                {
+                    success: false,
+                    message: "pedido Not Found by user ID"             
+                }
+            )
+        }
+
+        return res.status(200).json(
+            {
+                success: true,
+                message: 'All orders retrieved succsessfully',
+                data: pedido
+            }
+        )
+    } catch (error) {
+        return res.status(500).json(
+            {
+                success: false,
+                message: 'Error retriving all orders',
+                error: error.message
+            }
+        )
+    }
+}
+
+
+
 // Export orderController
 module.exports= orderController

@@ -10,7 +10,7 @@ const movieSchema = new mongoose.Schema({
         
         type: String,
         required: true,
-        enum: ['adventure', 'fantasy', 'action', 'terror'],  
+        enum: ['adventure', 'fantasy', 'action', 'terror','Science fiction', 'comedi', 'drama', 'musical', 'suspense', 'peliculas 3D'],  
         default: ''
     },
     director: {
@@ -20,8 +20,7 @@ const movieSchema = new mongoose.Schema({
     actors: {
         type: String,
         required: true,
-        enum: ['Keanu Reeves', 'actor1','bratt bird'],
-        default: '' 
+        
     },
     year: {
         type: Number,
