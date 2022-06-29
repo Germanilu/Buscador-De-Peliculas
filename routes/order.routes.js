@@ -8,6 +8,7 @@ const router = require('express').Router();
 router.post('/order/:id', verifyToken, orderController.create)
 //Mostrar TODAS las order realizadas
 router.get('/orders',verifyToken,isSuperAdmin, orderController.getAll)
+router.get('/orders/user',verifyToken,isSuperAdmin, orderController.getbyUserId)
 
 
 //Exportando router.
