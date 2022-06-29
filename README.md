@@ -91,7 +91,7 @@ Here you can find all the methods you can use on Postman to be able to do your r
    
 ## Author 	
 
-#### [Marc Serrats Pagès](https://github.com/Germanilu) :es:
+#### [Marc Serrats Pagès](https://github.com/pagesMp) :es:
 #### [Ibrahim Alzuru Cortés ](https://github.com/ibralzuru) :venezuela:
 #### [Luciano Germani](https://github.com/Germanilu) :it:
  
