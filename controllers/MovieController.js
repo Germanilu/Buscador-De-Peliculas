@@ -159,12 +159,12 @@ movieController.getMovieByDirector = async (req,res) => {
 // TODAVIA NO FUNCIONA , SEGUIR TRABAJANDO EN EL!
 movieController.getMovieByActor = async (req,res) => {
     try {
-        let actors = req.query.actors;
+        let {actors} = req.body;
       
         const movie = await Movie.find({actors});
    
 
-        if(!movie){
+        if(!actors || movie.length === 0 || !movie){
             return res.status(404).json(
                 {
                     success: false,
