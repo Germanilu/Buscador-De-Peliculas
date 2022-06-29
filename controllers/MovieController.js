@@ -160,11 +160,7 @@ movieController.getMovieByDirector = async (req,res) => {
 movieController.getMovieByActor = async (req,res) => {
     try {
         let {actors} = req.body;
-<<<<<<< HEAD
-        console.log(movie);
-=======
->>>>>>> 4e96f895588b6464721de96096e3bfe5a4bcf3ab
-      
+              
         const movie = await Movie.find({actors});
    
 
