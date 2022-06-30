@@ -61,13 +61,25 @@ app.get('*', (req,res) => {
 // });
 
 
-const cors = require('cors');
-const corsOptions ={
-    origin:'http://localhost:3000', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
+  
+  app.get('/jokes/random', (req, res) => {
+    request(
+      { url: 'https://joke-api-strict-cors.appspot.com/jokes/random' },
+      (error, response, body) => {
+        if (error || response.statusCode !== 200) {
+          return res.status(500).json({ type: 'error', message: err.message });
+        }
+  
+        res.json(JSON.parse(body));
+      }
+    )
+  });
+
+
 
 
 // Ejecuto db para que funcione database.js
