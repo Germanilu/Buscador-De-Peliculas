@@ -86,7 +86,7 @@ movieController.getMovieById = async(req,res) => {
 
 movieController.getMovieByTitle = async (req,res) => {
     try {
-        const {name} = req.params;
+        const {name} = req.body;
         
         const movie = await Movie.findOne({name})
 
