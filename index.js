@@ -18,11 +18,16 @@ const movieRoutes = require('./routes/movie.routes');
 const orderRoutes = require('./routes/order.routes');
 
 
+const cors = require('cors');
+
+
 //conecto express a mi const app
 const app = express(); 
 
 //Analiza la request de entrada y pinta los datos en el body
 app.use(express.json())  
+
+app.use(cors(corsOptions));
 
 //Puerto que utiliza el sv
 const port = process.env.PORT || 4000; 
@@ -51,14 +56,14 @@ app.get('*', (req,res) => {
 
 
 
-//cors
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    next();
-});
+// //cors
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+//     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+//     res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+//     next();
+// });
 
 
 
