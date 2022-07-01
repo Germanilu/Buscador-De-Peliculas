@@ -17,7 +17,7 @@ const movieRoutes = require('./routes/movie.routes');
 //Conexion con order routes
 const orderRoutes = require('./routes/order.routes');
 
-
+//Requiero cors
 const cors = require('cors');
 
 
@@ -28,9 +28,9 @@ const app = express();
 app.use(express.json())  
 
 
-
+//Cors
 let corsOptions = {    origin: "*",    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",    preflightContinue: false,     allowedHeaders: "Origin,X-Requested-With,Content-Type,Accept,Authorization",    optionsSuccessStatus: 204};
-
+//Uso Cors
 app.use(cors(corsOptions));
 
 //Puerto que utiliza el sv

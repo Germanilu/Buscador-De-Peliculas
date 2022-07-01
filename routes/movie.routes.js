@@ -9,7 +9,7 @@ router.post('/movie', movieController.create)
 //Get movie by Id
 router.get('/movie/id=:id',movieController.getMovieById)
 //Get movie by Title
-router.get('/movie/',movieController.getMovieByTitle)
+router.get('/movie/:title',movieController.getMovieByTitle)
 //Get all movie
 router.get('/movie/all', movieController.getAll)
 //get by Director
