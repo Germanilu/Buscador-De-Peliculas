@@ -6,7 +6,6 @@ const movieController = {};
 //Metodo Post new Movie
 movieController.create = async (req,res) => {
     try {
-
         const {name, genre, director, actors, year} = req.body
         const newMovie = {
             name,
@@ -37,10 +36,8 @@ movieController.create = async (req,res) => {
 //Get Movie By Id
 movieController.getMovieById = async(req,res) => {
     try {
-       
         const {id} = req.params;
         const movie = await Movie.findById(id)
-
         //Condicion si el id no existe
         if(!movie){
             return res.status(404).json(
@@ -50,7 +47,6 @@ movieController.getMovieById = async(req,res) => {
                 }
             )
         };
-
         return res.status(200).json(
             {
                 success: true,
@@ -58,7 +54,6 @@ movieController.getMovieById = async(req,res) => {
                 data:movie
             }
         )
-
     } catch (error) {
 
         if(error?.message.includes('Cast to ObjectId failed')){
@@ -70,7 +65,6 @@ movieController.getMovieById = async(req,res) => {
                 }
             );
         }
-
         return res.status(500).json(
             {
                 success: false,
@@ -83,13 +77,11 @@ movieController.getMovieById = async(req,res) => {
 
 
 //Get movie by Title
-
 movieController.getMovieByTitle = async (req,res) => {
     try {
-        const {name} = req.body;
+        const name = req.params;   
+        const movie = await Movie.find(name)
         
-        const movie = await Movie.findOne({name})
-
         if(!movie){
             return res.status(404).json(
                 {
@@ -118,15 +110,13 @@ movieController.getMovieByTitle = async (req,res) => {
         )
     }
 }
-//Get movie by Director
 
+//Get movie by Director
 movieController.getMovieByDirector = async (req,res) => {
     try {
-        let director = req.query.director;
-      
-        const movie = await Movie.find({director});
-   
-
+        let director = req.params;
+        const movie = await Movie.find(director);
+        
         if(!movie){
             return res.status(404).json(
                 {
@@ -155,14 +145,13 @@ movieController.getMovieByDirector = async (req,res) => {
         )
     }
 }
+
+
 //Get movie by Actor
-// TODAVIA NO FUNCIONA , SEGUIR TRABAJANDO EN EL!
 movieController.getMovieByActor = async (req,res) => {
     try {
-        let {actors} = req.body;
-              
-        const movie = await Movie.find({actors});
-   
+        let actors = req.params;       
+        const movie = await Movie.find(actors);
 
         if(!actors || movie.length === 0 || !movie){
             return res.status(404).json(
@@ -194,7 +183,6 @@ movieController.getMovieByActor = async (req,res) => {
 }
 
 
-
 //Get all movie
 movieController.getAll = async (req,res) => {
     try {
@@ -206,6 +194,7 @@ movieController.getAll = async (req,res) => {
                 data: movie
             }
         )
+
     } catch (error) {
         return res.status(500).json(
             {
@@ -217,16 +206,13 @@ movieController.getAll = async (req,res) => {
     }
 }
 
-// Filtrar por genre
 
+// Filtrar por genre
 movieController.getByGenre = async(req,res) => {
     try {
-
-        const {genre} = req.body;
-        
-        const movie = await Movie.find({genre});
+        const genre = req.params;
+        const movie = await Movie.find(genre);
                     
-              
         if(!genre || movie.length === 0 || !movie){
             return res.status(404).json(
                 
@@ -236,15 +222,6 @@ movieController.getByGenre = async(req,res) => {
                 }
             )
         }    
-                
-        // generos.forEach(i =>{
-        //     if(genre != i){
-        //         return res.status(404).json({
-        //             success: false,
-        //             message: "Genre doesn't exist",
-        //         })
-        //     }
-        // })
 
         return res.status(200).json(
             {
