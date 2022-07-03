@@ -32,7 +32,6 @@ movieController.create = async (req,res) => {
     }
 }
 
-
 //Get Movie By Id
 movieController.getMovieById = async(req,res) => {
     try {
@@ -74,7 +73,6 @@ movieController.getMovieById = async(req,res) => {
         )
     }
 }
-
 
 //Get movie by Title
 movieController.getMovieByTitle = async (req,res) => {
@@ -146,7 +144,6 @@ movieController.getMovieByDirector = async (req,res) => {
     }
 }
 
-
 //Get movie by Actor
 movieController.getMovieByActor = async (req,res) => {
     try {
@@ -182,7 +179,6 @@ movieController.getMovieByActor = async (req,res) => {
     }
 }
 
-
 //Get all movie
 movieController.getAll = async (req,res) => {
     try {
@@ -205,7 +201,6 @@ movieController.getAll = async (req,res) => {
         )
     }
 }
-
 
 // Filtrar por genre
 movieController.getByGenre = async(req,res) => {
@@ -242,5 +237,4 @@ movieController.getByGenre = async(req,res) => {
     }
 }
 
-//Export movieController
 module.exports= movieController

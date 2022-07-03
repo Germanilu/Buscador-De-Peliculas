@@ -8,9 +8,6 @@ const isSuperAdmin = require('../middlewares/isSuperAdmin');
 //Requiero la funcion middleware de verifyToken
 const verifyToken = require('../middlewares/verifyToken');
 
-
-//Todas las rutas tienen verifyToken para que se verifique que el usuario existe y esta registrado
-
 //Ruta para buscar todos los usuarios (solo puede hacerlo un super_admin)
 router.get('/users', verifyToken, isSuperAdmin, userController.getAll);  
 
