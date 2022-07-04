@@ -1,9 +1,5 @@
-// Modelo User
-
-//Requiero mongoose
 const mongoose = require('mongoose');
 
-//Creo el schema 
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -11,19 +7,19 @@ const UserSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true, // es requerido si o si
-        unique: true, //Es unico no se peude repetir
+        required: true, 
+        unique: true, 
     },
     password: {
         type: String,
         required: true,
-        minLength: 6, //minimo de caracteres de la contraseña
+        minLength: 6, 
     },
-    //Role de usuario 
+     
     role: {
         type: String,
         enum: ['user', 'admin', 'super_admin'],  
-        default: 'user' // Por default el role va a ser de tipo user
+        default: 'user' 
         
     },
     
@@ -35,9 +31,7 @@ const UserSchema = new mongoose.Schema({
 
 );
 
-//Creo el modelo User 
 const User = mongoose.model('User',UserSchema);
 
-//exporto el modelo
 module.exports = User;
 

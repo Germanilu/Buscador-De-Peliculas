@@ -1,7 +1,5 @@
-//Me llevo los modelos de User
 const User = require("../models/User");
 
-//Constante userController con objeto
 const userController = {};
 
 //Metodo getAll
@@ -9,43 +7,39 @@ userController.getAll = async (req,res) => {
     try {
         const users = await User.find();
 
-        return res.status(200).json(  // mi devolucion va a ser de tipo json 
+        return res.status(200).json(  
             {
-                success: true,  // Esto sera que ha ido bien
-                message: 'All users retrieved succsessfully', // Este sera el mensaje
-                data: users // Esta es la info users
+                success: true,  
+                message: 'All users retrieved succsessfully',
+                data: users 
             }
         );
     } catch (error) {
-        return res.status(500).json(  // mi devolucion va a ser de tipo json 
+        return res.status(500).json(  
             {
-                success: false,  // Esto sera que ha ido mal
-                message: 'Error retriving users', // Este sera el mensaje
-                error: error.message // que devuelva el error
+                success: false,  
+                message: 'Error retriving users',
+                error: error.message
             }
         )
     }
 };
 
-
-
 // Metodo get por ID
 userController.getUserById = async(req,res) => {
-    //console.log(req.params); // recupero para ver si funca y lo veo en consola
-
+   
     try {
-        const {id} = req.params; // aqui recupero el id por url
+        const {id} = req.params; 
 
-        const user = await User.findById(id) // almaceno la consulta asincronta en la const user
-
-        //Este bloque if me devuelve si la busqueda esta hecha bien osea el id esta escrito bien es valido sino me devolvera el catch de abajo
+        const user = await User.findById(id) 
+       
         if(!user){
             return res.status(404).json
             (
                 {
                     success: true,
                     message: "User NOT found",
-                    data: [] // paso el user d arriba aqui
+                    data: [] 
                 }
             )
         }
@@ -54,7 +48,7 @@ userController.getUserById = async(req,res) => {
         {
             success: true,
             message: "User found",
-            data: user // paso el user d arriba aqui
+            data: user 
         }
     )
     } catch (error) {
@@ -77,15 +71,12 @@ userController.getUserById = async(req,res) => {
     }
 };
 
-
-
 //Metodo DELETE BY ID
 userController.deleteById = async(req,res) => {
 
     try {
         const {id} = req.params;
 
-        //Condicion para que el usuario pueda borrar solo su perfil 
         if(id !== req.user_id ){
             return res.status(200).json(
                 {
@@ -112,7 +103,6 @@ userController.deleteById = async(req,res) => {
         )
     }
 }
-
 
 //METODO UPDATE
 userController.update = async (req,res) => {
@@ -153,6 +143,5 @@ userController.update = async (req,res) => {
     }
 }
 
-//Exporto userController
 module.exports = userController
 

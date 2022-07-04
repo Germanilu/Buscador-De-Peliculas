@@ -13,17 +13,16 @@ const orderSchema = new mongoose.Schema({
         required: true
     },
     movieName: {
-        type: String //Para que se vea en compass, sgro hay otra manera d hacrlo
+        type: String 
     },
     returnDate: {
         type: Date,
-        default: +new Date() + 7*24*60*60*1000 // Para que la fecha de retorno sea 7 dias despues
+        default: +new Date() + 7*24*60*60*1000 
     },
     haveOrder: {
         type: Boolean,
         default: false
     }
-
 })
 
 const Order = mongoose.model('Order',orderSchema);

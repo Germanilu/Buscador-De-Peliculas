@@ -1,5 +1,3 @@
-
-
 //Importo jsonwebtoken
 const jwt = require('jsonwebtoken'); 
 

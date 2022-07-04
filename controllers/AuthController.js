@@ -4,10 +4,8 @@ const User = require("../models/User");
 const bcrypt = require('bcrypt'); 
 // importo la libreria del jsonweb token 
 const jwt = require('jsonwebtoken'); 
-
 //Creo un objeto vacio y conecto a la constante
 const authController = {};
-
 
 // CREACION DE USUARIO
 authController.register = async (req,res) => {
@@ -26,14 +24,11 @@ authController.register = async (req,res) => {
             )
         }
 
-        //Codificacion password
-        // es el algoritmo con el cual genero el nuevo hash de la linea abajo el 10 es la cantidad de veces q ejecuto el genSalt
+        //Codificacion password       
         const salt = await bcrypt.genSalt(10);
         //Conecto a mi encryptedPassword el nuevo hash creado.
         const encryptedPassword = await bcrypt.hash(password, salt);
         
-
-       // Esta logica es por si la contra es menor de 6 = haria para >10 
         if(password.lenght < 6 || password.lenght > 10){
             return res.status(500).json(
                 {
@@ -42,16 +37,14 @@ authController.register = async (req,res) => {
                 }
             )
         }
-
-        //Almaceno todo lo de req.body en una constante con la passwd = a encryptedPassword para esconderla.
+        
         const newUser = {
             name,
             email,
-            password: encryptedPassword // aqui una vez encryptada la pass mostrara la passwd encryptada
+            password: encryptedPassword
         }
 
-        //creo el metodo create para que se cree el nuevo usuario
-       await User.create(newUser)
+        await User.create(newUser)
         return res.status(200).json(
             {
             success: true,
@@ -63,20 +56,18 @@ authController.register = async (req,res) => {
             {
             success: false,
             message: 'Error creating user: ',
-            error: error?.message || error //el ? es como el if else en 1 linea ? or :
+            error: error?.message || RangeError
             }
         )
     }
 };
 
-
 //LOGIN DE USUARIO
 authController.login = async (req,res) => {
 
     try {
-        const { email, password} = req.body;  // Lo que le paso x body 
+        const { email, password} = req.body;
 
-        //Esto es por si no existe el mail y pass le tiro el error
         if(!email || !password){
             return res.status(400).json(
                 {
@@ -89,7 +80,6 @@ authController.login = async (req,res) => {
         // Busco si el usuario existe
         const user = await User.findOne({email: email})  
 
-        // Si el usuario no existe tira bad credential
         if(!user){
             return res.status(400).json(
                 {
@@ -102,7 +92,6 @@ authController.login = async (req,res) => {
         //Reviso si el passw es valido
         const isValidPassword = bcrypt.compareSync(password, user.password);
         
-        // Si el passw no es valido tira bad credential
         if(!isValidPassword){
             return res.status(401).json(
                 {
@@ -113,11 +102,7 @@ authController.login = async (req,res) => {
         }
 
        //aqui creo mi jsonwebtoken
-       // el primer argumento de jwt.sing es la info que quiero que el token almacene en este caso el user id y el user role
-       //el secreto sirve para q cuanod accedo la firma sea valida en este caso lo he escondido en el .env en JWT_SECRET
-       // El 3cer argumento es cuando expira el token
-       const token = await jwt.sign({user_id : user._id, user_role: user.role}, process.env.JWT_SECRET, { expiresIn: '5h' });
-
+        const token = await jwt.sign({user_id : user._id, user_role: user.role}, process.env.JWT_SECRET, { expiresIn: '5h' });
 
         return res.status(200).json(
             {
@@ -163,9 +148,6 @@ authController.profile = async (req,res) => {
             }
         )
     }
-} 
+}
 
-
-
-//Exporto authController
 module.exports = authController;

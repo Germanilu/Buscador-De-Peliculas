@@ -14,23 +14,16 @@ orderController.create = async(req,res) => {
         //Espero a que se encuentre la pelicula
        const movie = await Movie.findById(id)
 
-        //Per poterlo vedere in compass
         movieName = movie.name
 
         const newOrder = {
         userId,
         movie,
         movieName
-    }
-
-      
+    }      
         //Logic if user already Order 1 movie.
         const order = await Order.find({userId})
-
-        //Saco la fecha de hoy
-        const movieDate = new Date
-    
-        
+          
         if(order.length > 0){
             return res.status(400).json(
                 {
@@ -95,8 +88,6 @@ orderController.getAll = async (req,res) => {
     }
 }
 
-
-
 orderController.getbyUserId = async (req,res) => {
     try {
         const {userId} = req.params;
@@ -131,7 +122,4 @@ orderController.getbyUserId = async (req,res) => {
     }
 }
 
-
-
-// Export orderController
 module.exports= orderController
