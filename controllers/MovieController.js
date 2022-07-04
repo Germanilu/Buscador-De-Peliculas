@@ -3,6 +3,8 @@ const Movie = require('../models/Movie')
 
 const movieController = {};
 
+
+
 //Metodo Post new Movie
 movieController.create = async (req,res) => {
     try {
@@ -15,8 +17,9 @@ movieController.create = async (req,res) => {
             actors,
             year,
             img
+            
         }
-
+        console.log(newMovie)
        await Movie.create(newMovie)
         
         return res.status(200).json(
@@ -242,3 +245,4 @@ movieController.getByGenre = async(req,res) => {
 }
 
 module.exports= movieController
+
