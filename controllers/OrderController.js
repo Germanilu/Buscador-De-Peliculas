@@ -99,7 +99,7 @@ orderController.getAll = async (req,res) => {
 
 orderController.getbyUserId = async (req,res) => {
     try {
-        const {userId} = req.body;
+        const {userId} = req.params;
 
         const pedido = await Order.find({userId});
         

@@ -7,7 +7,6 @@ const movieSchema = new mongoose.Schema({
         required: true
     },
     genre: {
-        
         type: String,
         required: true,
         enum: ['adventure', 'fantasy', 'action', 'terror','Science fiction', 'comedi', 'drama', 'musical', 'suspense', 'peliculas 3D'],  
@@ -25,7 +24,12 @@ const movieSchema = new mongoose.Schema({
     year: {
         type: Number,
         required: true
+    },
+    img: {
+        type: String,
+        required: true
     }
+    
 })
 
 const Movie = mongoose.model('Movie', movieSchema);

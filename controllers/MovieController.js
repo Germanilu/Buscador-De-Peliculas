@@ -6,16 +6,19 @@ const movieController = {};
 //Metodo Post new Movie
 movieController.create = async (req,res) => {
     try {
-        const {name, genre, director, actors, year} = req.body
+        const {name, genre, director, actors, year,img} = req.body
+
         const newMovie = {
             name,
             genre,
             director,
             actors,
-            year
+            year,
+            img
         }
 
-        await Movie.create(newMovie)
+       await Movie.create(newMovie)
+        
         return res.status(200).json(
             {
                 success: true,
@@ -23,6 +26,7 @@ movieController.create = async (req,res) => {
             }
         )
     } catch (error) {
+        
         return res.status(500).json(
             {
                 success: false,

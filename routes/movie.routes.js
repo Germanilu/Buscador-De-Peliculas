@@ -1,5 +1,6 @@
 //Requiero el controlador
-const movieController = require('../controllers/MovieController')
+const movieController = require('../controllers/MovieController');
+
 
 //Requiero express
 const router = require('express').Router();
