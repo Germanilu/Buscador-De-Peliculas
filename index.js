@@ -6,8 +6,24 @@ require('dotenv').config();
 const db = require('./config/database');  
 
 
+const multer = require('multer')
+
+
+const fileStorageEngine = multer.diskStorage({
+    destination: (req,file,cb) => {
+        cb(null, './images')
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname)
+    }
+})
+
+const upload = multer({storage: fileStorageEngine})
+
+
+
 // Conexion con user routes 
-const userRoutes = require('./routes/user.routes') 
+const userRoutes = require('./routes/user.routes');
 // Conexion con auth routes 
 const authRoutes = require('./routes/auth.routes'); 
 //Conexion con movie routes
@@ -21,6 +37,13 @@ const cors = require('cors');
 
 //conecto express a mi const app
 const app = express(); 
+
+
+
+//Multer
+app.post('/single', upload.single('image'),(req,res) => {
+    res.send("subido bien")
+})
 
 //Analiza la request de entrada y pinta los datos en el body
 app.use(express.json())  
