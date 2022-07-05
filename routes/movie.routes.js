@@ -7,7 +7,6 @@ const router = require('express').Router();
 
 
 
-
 //Create movie.
 router.post('/movie/', movieController.create)
 //Get movie by Id
