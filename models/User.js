@@ -5,6 +5,18 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    surname:{
+        type: String,
+        required: true
+    },
+    address:{
+        type: String,
+        required: true
+    },
+    city:{
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true, 
@@ -14,6 +26,14 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         minLength: 6, 
+    },
+    age:{
+        type:Number,
+        required: true
+    },
+    mobile:{
+        type: Number,
+        required: true
     },
      
     role: {

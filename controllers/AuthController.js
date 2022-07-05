@@ -12,7 +12,7 @@ authController.register = async (req,res) => {
     
     try {
         // almaceno todo lo de req.body 
-        const {name, email, password} = req.body  
+        const {name, surname, address, city, email, password,age, mobile } = req.body  
         
         //Validar campos introducidos (si falta algo no puedo crear el usuario)
         if(!name || !email || !password){
@@ -40,8 +40,13 @@ authController.register = async (req,res) => {
         
         const newUser = {
             name,
+            surname,
+            address,
+            city,
             email,
-            password: encryptedPassword
+            password: encryptedPassword,
+            age,
+            mobile
         }
 
         await User.create(newUser)
