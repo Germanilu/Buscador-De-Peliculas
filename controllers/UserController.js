@@ -108,6 +108,8 @@ userController.deleteById = async(req,res) => {
 userController.update = async (req,res) => {
     try {
         const {id} = req.params;
+
+        
         if(req.body.name === ""){
             return res.status(400).json(
                 {
@@ -123,6 +125,9 @@ userController.update = async (req,res) => {
             email,
             password
         }
+
+        console.log(id)
+        console.log(body)
     
        await User.findOneAndUpdate({_id:id},updateUser) 
         return res.status(200).json(
