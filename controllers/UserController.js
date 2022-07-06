@@ -127,6 +127,7 @@ userController.update = async (req,res) => {
         console.log(id)
 
         console.log(req.body)
+        console.log(updateUser)
        
     
        await User.findOneAndUpdate({_id:id},updateUser) 

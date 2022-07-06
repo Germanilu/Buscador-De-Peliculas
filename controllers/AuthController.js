@@ -29,7 +29,7 @@ authController.register = async (req,res) => {
         //Conecto a mi encryptedPassword el nuevo hash creado.
         const encryptedPassword = await bcrypt.hash(password, salt);
         
-        if(password.lenght < 6 || password.lenght > 10){
+        if(password.length < 6 || password.length > 10){
             return res.status(500).json(
                 {
                     success: false,
