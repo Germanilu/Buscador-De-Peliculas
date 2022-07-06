@@ -197,6 +197,7 @@ movieController.getMovieByActor = async (req, res) => {
 movieController.getAll = async (req, res) => {
     try {
         const movie = await Movie.find()
+        
         return res.status(200).json(
             {
                 success: true,

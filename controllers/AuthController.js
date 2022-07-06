@@ -72,7 +72,7 @@ authController.login = async (req,res) => {
 
     try {
         const { email, password} = req.body;
-
+        
         if(!email || !password){
             return res.status(400).json(
                 {
@@ -84,7 +84,8 @@ authController.login = async (req,res) => {
 
         // Busco si el usuario existe
         const user = await User.findOne({email: email})  
-
+       
+        console.log(user.name)
         if(!user){
             return res.status(400).json(
                 {
@@ -106,9 +107,23 @@ authController.login = async (req,res) => {
             );
         }
 
-       //aqui creo mi jsonwebtoken
-        const token = await jwt.sign({user_id : user._id, user_role: user.role}, process.env.JWT_SECRET, { expiresIn: '5h' });
+        
 
+       //aqui creo mi jsonwebtoken
+        const token = await jwt.sign({
+            user_id : user._id,
+            user_role: user.role,
+            user_name: user.name,
+            user_surname: user.surname,
+            user_address: user.address,
+            user_city: user.city,
+            user_email: user.email,
+            user_age: user.age,
+            user_mobile: user.mobile
+        
+        }, process.env.JWT_SECRET, { expiresIn: '5h' });
+
+        console.log(token)
         return res.status(200).json(
             {
                 success: true,
@@ -133,6 +148,7 @@ authController.profile = async (req,res) => {
     try {
         
         const userId = req.user_id
+        console.log(userId)
         //Esto me sirve para que enseñe el perfil del token que esta haciendo la busqueda y que me esconda la password (.select(["-password"]))
         // Si no pongon _id me devolvera siempre el perfil del superadmin 
         const user = await User.findOne({_id: userId}).select(["-password", "-__v"])
