@@ -117,11 +117,16 @@ userController.update = async (req,res) => {
             )
         }
 
-        const {name,email,password} = req.body
+        const {name,email,password,surname,address,city,age,mobile} = req.body
         const updateUser = {
             name,
             email,
-            password
+            password,
+            surname,
+            address,
+            city,
+            age,
+            mobile
         }
 
         console.log(id)
