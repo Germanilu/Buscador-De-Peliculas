@@ -9,7 +9,7 @@ const movieSchema = new mongoose.Schema({
     genre: {
         type: String,
         required: true,
-        enum: ['adventure', 'fantasy', 'action', 'terror','Science fiction', 'comedi', 'drama', 'musical', 'suspense', 'peliculas 3D'],  
+        enum: ['Aventura', 'Dibujos Animados', 'Acción', 'Terror','Ciencia Ficción', 'Comedia', 'Drama', 'Musical', 'Suspense', 'Peliculas 3D'],  
         default: ''
     },
     director: {
@@ -33,7 +33,10 @@ const movieSchema = new mongoose.Schema({
         type: String,
         require: true,
         default: ""
-        
+    },
+    price: {
+        type: Number,
+        required: true
     }
     
 })

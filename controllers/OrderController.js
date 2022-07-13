@@ -13,7 +13,7 @@ orderController.create = async(req,res) => {
         const userId = req.user_id;
         //Espero a que se encuentre la pelicula
        const movie = await Movie.findById(id)
-
+            console.log("LLego aqui")
         movieName = movie.name
 
         const newOrder = {

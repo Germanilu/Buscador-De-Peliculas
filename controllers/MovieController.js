@@ -10,7 +10,7 @@ const movieController = {};
 movieController.create = async (req, res) => {
 
     try {
-        const { name, genre, director, actors, description, year, img } = req.body
+        const { name, genre, director, actors, description, year, img, price } = req.body
 
         const newMovie = {
             name,
@@ -19,7 +19,8 @@ movieController.create = async (req, res) => {
             actors,
             description,
             year,
-            img
+            img,
+            price
 
         }
         console.log("Soy newmovie", newMovie)
