@@ -14,12 +14,12 @@ orderController.create = async(req,res) => {
         //Espero a que se encuentre la pelicula
        const movie = await Movie.findById(id)
             console.log("LLego aqui")
-        movieName = movie.name
+        
 
         const newOrder = {
         userId,
-        movie,
-        movieName
+        movie
+        
     }      
         //Logic if user already Order 1 movie.
         const order = await Order.find({userId})
