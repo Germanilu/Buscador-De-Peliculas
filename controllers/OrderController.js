@@ -95,11 +95,13 @@ orderController.getAll = async (req,res) => {
 
 orderController.getbyUserId = async (req,res) => {
     try {
-        const {userId} = req.params;
-
+        const {userId} = req.body;
+        
+        
         const pedido = await Order.find({userId});
         
-        if(!userId || pedido.length ===0 || !pedido){
+        if(!userId || pedido.length === 0 || !pedido){
+             
             return res.status(404).json(
                 
                 {
