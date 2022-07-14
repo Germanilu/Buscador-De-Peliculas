@@ -19,7 +19,7 @@ orderController.create = async(req,res) => {
 
         const newOrder = {
         userId,
-        movie
+        movie,
     }      
 
     
