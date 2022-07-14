@@ -15,11 +15,13 @@ orderController.create = async(req,res) => {
         //Espero a que se encuentre la pelicula
         const movie = await Movie.findById(id)
             console.log("LLego aqui", movie)
-            
+        const movieName = movie.name
+        console.log("moviename",movieName)
 
         const newOrder = {
         userId,
-        movie,
+        movieName,
+        movie
     }      
 
     
@@ -30,7 +32,8 @@ orderController.create = async(req,res) => {
             return res.status(400).json(
                 {
                     success: false,
-                    message: 'Ya tienes una pelicula alquilada',
+                    message: `Ya tienes una pelicula alquilada, es: ${movieName}`,
+                    
                 }
             )
         }
@@ -132,8 +135,8 @@ orderController.getMyOrder = async(req,res) => {
         const idusuario = req.user_id
         console.log(idusuario)
         const order = await Order.findOne( {userId:idusuario})
-        
-        console.log("Soy x",x)
+
+        console.log("Soy x",order._id)
         return res.status(200).json(
             {
                 success: true,
