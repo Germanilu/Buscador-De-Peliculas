@@ -15,7 +15,7 @@ orderController.create = async(req,res) => {
         //Espero a que se encuentre la pelicula
         const movie = await Movie.findById(id)
             console.log("LLego aqui", movie)
-        
+            
 
         const newOrder = {
         userId,
