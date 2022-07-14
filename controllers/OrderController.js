@@ -124,4 +124,31 @@ orderController.getbyUserId = async (req,res) => {
     }
 }
 
+
+
+
+orderController.getMyOrder = async(req,res) => {
+    try {
+        const idusuario = req.user_id
+        console.log(idusuario)
+        const order = await Order.findOne( {userId:idusuario})
+        
+        console.log("Soy x",x)
+        return res.status(200).json(
+            {
+                success: true,
+                message: "User profile",
+                data:order
+            }
+        )
+    } catch (error) {
+        return res.status(400).json(
+            {
+                success: false,
+                message: 'ERROR'
+            }
+        )
+    }
+}
+
 module.exports= orderController
