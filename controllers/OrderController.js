@@ -43,7 +43,7 @@ orderController.create = async(req,res) => {
             {
                 success: true,
                 message: "Order created.",
-                data: userId , movie,
+                data: newOrder
             }
             
         )
