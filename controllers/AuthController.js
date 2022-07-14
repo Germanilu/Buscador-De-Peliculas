@@ -12,7 +12,7 @@ authController.register = async (req,res) => {
     
     try {
         // almaceno todo lo de req.body 
-        const {name, email, password} = req.body  
+        const {name, surname, address, city, email, password,age, mobile } = req.body  
         
         //Validar campos introducidos (si falta algo no puedo crear el usuario)
         if(!name || !email || !password){
@@ -29,7 +29,7 @@ authController.register = async (req,res) => {
         //Conecto a mi encryptedPassword el nuevo hash creado.
         const encryptedPassword = await bcrypt.hash(password, salt);
         
-        if(password.lenght < 6 || password.lenght > 10){
+        if(password.length < 6 || password.length > 10){
             return res.status(500).json(
                 {
                     success: false,
@@ -40,8 +40,13 @@ authController.register = async (req,res) => {
         
         const newUser = {
             name,
+            surname,
+            address,
+            city,
             email,
-            password: encryptedPassword
+            password: encryptedPassword,
+            age,
+            mobile
         }
 
         await User.create(newUser)
@@ -67,7 +72,7 @@ authController.login = async (req,res) => {
 
     try {
         const { email, password} = req.body;
-
+        
         if(!email || !password){
             return res.status(400).json(
                 {
@@ -79,7 +84,8 @@ authController.login = async (req,res) => {
 
         // Busco si el usuario existe
         const user = await User.findOne({email: email})  
-
+       
+        console.log(user.name)
         if(!user){
             return res.status(400).json(
                 {
@@ -101,9 +107,23 @@ authController.login = async (req,res) => {
             );
         }
 
-       //aqui creo mi jsonwebtoken
-        const token = await jwt.sign({user_id : user._id, user_role: user.role}, process.env.JWT_SECRET, { expiresIn: '5h' });
+        
 
+       //aqui creo mi jsonwebtoken
+        const token = await jwt.sign({
+            user_id : user._id,
+            user_role: user.role,
+            user_name: user.name,
+            user_surname: user.surname,
+            user_address: user.address,
+            user_city: user.city,
+            user_email: user.email,
+            user_age: user.age,
+            user_mobile: user.mobile
+        
+        }, process.env.JWT_SECRET, { expiresIn: '5h' });
+
+        console.log(token)
         return res.status(200).json(
             {
                 success: true,
@@ -128,6 +148,7 @@ authController.profile = async (req,res) => {
     try {
         
         const userId = req.user_id
+        console.log(userId)
         //Esto me sirve para que enseñe el perfil del token que esta haciendo la busqueda y que me esconda la password (.select(["-password"]))
         // Si no pongon _id me devolvera siempre el perfil del superadmin 
         const user = await User.findOne({_id: userId}).select(["-password", "-__v"])

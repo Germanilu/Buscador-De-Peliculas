@@ -3,19 +3,33 @@ const Movie = require('../models/Movie')
 
 const movieController = {};
 
+
+    
+
 //Metodo Post new Movie
-movieController.create = async (req,res) => {
+movieController.create = async (req, res) => {
+
     try {
-        const {name, genre, director, actors, year} = req.body
+        const { name, genre, director, actors, description, year, img, price } = req.body
+
         const newMovie = {
             name,
             genre,
             director,
             actors,
-            year
+            description,
+            year,
+            img,
+            price
+
         }
+        console.log("Soy newmovie", newMovie)
 
         await Movie.create(newMovie)
+
+
+
+
         return res.status(200).json(
             {
                 success: true,
@@ -23,6 +37,7 @@ movieController.create = async (req,res) => {
             }
         )
     } catch (error) {
+
         return res.status(500).json(
             {
                 success: false,
@@ -33,12 +48,12 @@ movieController.create = async (req,res) => {
 }
 
 //Get Movie By Id
-movieController.getMovieById = async(req,res) => {
+movieController.getMovieById = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const movie = await Movie.findById(id)
         //Condicion si el id no existe
-        if(!movie){
+        if (!movie) {
             return res.status(404).json(
                 {
                     success: false,
@@ -50,12 +65,12 @@ movieController.getMovieById = async(req,res) => {
             {
                 success: true,
                 message: 'Movie found',
-                data:movie
+                data: movie
             }
         )
     } catch (error) {
 
-        if(error?.message.includes('Cast to ObjectId failed')){
+        if (error?.message.includes('Cast to ObjectId failed')) {
             return res.status(404).json(
                 {
                     success: true,
@@ -75,17 +90,17 @@ movieController.getMovieById = async(req,res) => {
 }
 
 //Get movie by Title
-movieController.getMovieByTitle = async (req,res) => {
+movieController.getMovieByTitle = async (req, res) => {
     try {
-        const name = req.params;   
+        const name = req.params;
         const movie = await Movie.find(name)
-        
-        if(!movie){
+
+        if (!movie) {
             return res.status(404).json(
                 {
                     success: false,
                     message: "Movie NOT Found"
-                    
+
                 }
             )
         }
@@ -103,24 +118,24 @@ movieController.getMovieByTitle = async (req,res) => {
             {
                 success: false,
                 message: "Movie NOT Found"
-                
+
             }
         )
     }
 }
 
 //Get movie by Director
-movieController.getMovieByDirector = async (req,res) => {
+movieController.getMovieByDirector = async (req, res) => {
     try {
         let director = req.params;
         const movie = await Movie.find(director);
-        
-        if(!movie){
+
+        if (!movie) {
             return res.status(404).json(
                 {
                     success: false,
                     message: "Director NOT Found"
-                    
+
                 }
             )
         }
@@ -138,24 +153,24 @@ movieController.getMovieByDirector = async (req,res) => {
             {
                 success: false,
                 message: "Error retrieving movie whith director"
-                
+
             }
         )
     }
 }
 
 //Get movie by Actor
-movieController.getMovieByActor = async (req,res) => {
+movieController.getMovieByActor = async (req, res) => {
     try {
-        let actors = req.params;       
+        let actors = req.params;
         const movie = await Movie.find(actors);
 
-        if(!actors || movie.length === 0 || !movie){
+        if (!actors || movie.length === 0 || !movie) {
             return res.status(404).json(
                 {
                     success: false,
                     message: "Actor NOT Found"
-                    
+
                 }
             )
         }
@@ -173,16 +188,17 @@ movieController.getMovieByActor = async (req,res) => {
             {
                 success: false,
                 message: "Error retrieving movie whith actor"
-                
+
             }
         )
     }
 }
 
 //Get all movie
-movieController.getAll = async (req,res) => {
+movieController.getAll = async (req, res) => {
     try {
         const movie = await Movie.find()
+        
         return res.status(200).json(
             {
                 success: true,
@@ -203,29 +219,29 @@ movieController.getAll = async (req,res) => {
 }
 
 // Filtrar por genre
-movieController.getByGenre = async(req,res) => {
+movieController.getByGenre = async (req, res) => {
     try {
         const genre = req.params;
         const movie = await Movie.find(genre);
-                    
-        if(!genre || movie.length === 0 || !movie){
+
+        if (!genre || movie.length === 0 || !movie) {
             return res.status(404).json(
-                
+
                 {
                     success: false,
-                    message: "Movie NOT Found by genre"                  
+                    message: "Movie NOT Found by genre"
                 }
             )
-        }    
+        }
 
         return res.status(200).json(
             {
                 success: true,
                 message: "Movie Found by genre",
-                data: movie                
+                data: movie
             }
         )
-        
+
     } catch (error) {
         return res.status(500).json(
             {
@@ -237,4 +253,5 @@ movieController.getByGenre = async(req,res) => {
     }
 }
 
-module.exports= movieController
+module.exports = movieController
+

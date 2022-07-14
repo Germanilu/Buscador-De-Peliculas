@@ -117,12 +117,23 @@ userController.update = async (req,res) => {
             )
         }
 
-        const {name,email,password} = req.body
+        const {name,email,password,surname,address,city,age,mobile} = req.body
         const updateUser = {
             name,
             email,
-            password
+            password,
+            surname,
+            address,
+            city,
+            age,
+            mobile
         }
+
+        console.log(id)
+
+        console.log(req.body)
+        console.log(updateUser)
+       
     
        await User.findOneAndUpdate({_id:id},updateUser) 
         return res.status(200).json(

@@ -20,6 +20,9 @@ const verifyToken = (req, res, next) => {
         
         // Esto comprueba que el token es valido con la firma correspondiente(el secreto)
         var decoded = jwt.verify(token, process.env.JWT_SECRET);
+        
+       
+        
 
         // Si el decoded no es valido devuelvo un error
         if(!decoded){
@@ -34,6 +37,20 @@ const verifyToken = (req, res, next) => {
         //Esto no entiendo pq me sirve, recupero id y role dentro del token?
         req.user_id = decoded.user_id;
         req.user_role = decoded.user_role;
+        req.user_name = decoded.user_name
+        req.user_surname = decoded.user_surname
+        req.user_address = decoded.user_address
+        req.user_city = decoded.user_city
+        req.user_email = decoded.user_email
+        req.user_age = decoded.user_age
+        req.user_mobile = decoded.user_mobile
+        console.log("user id", req.user_surname)
+        console.log(decoded)
+       
+
+       
+        
+        
 
         // Si todo va bien, continuarà 
         next();  
