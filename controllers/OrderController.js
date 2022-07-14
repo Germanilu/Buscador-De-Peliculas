@@ -32,7 +32,8 @@ orderController.create = async(req,res) => {
             return res.status(400).json(
                 {
                     success: false,
-                    message: `Ya tienes una pelicula alquilada, es: ${movieName}`,
+                    message: "Ya tienes una pelicula alquilada",
+                    data: movieName
                     
                 }
             )
