@@ -8,19 +8,21 @@ const orderController = {};
 orderController.create = async(req,res) => {
     try {
         //Requiero el id de la peli por url
-        const {id} = req.params
+        const { id } = req.params
+        console.log("este es el id de la peli",id)
         //Recupero el userId desde el token
         const userId = req.user_id;
         //Espero a que se encuentre la pelicula
-       const movie = await Movie.findById(id)
-            console.log("LLego aqui")
+        const movie = await Movie.findById(id)
+            console.log("LLego aqui", movie)
         
 
         const newOrder = {
         userId,
         movie
-        
     }      
+
+    
         //Logic if user already Order 1 movie.
         const order = await Order.find({userId})
           
@@ -28,7 +30,7 @@ orderController.create = async(req,res) => {
             return res.status(400).json(
                 {
                     success: false,
-                    message: 'Unable to place the Order',
+                    message: 'Ya tienes una pelicula alquilada',
                 }
             )
         }
