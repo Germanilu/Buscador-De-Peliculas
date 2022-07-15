@@ -16,11 +16,13 @@ orderController.create = async(req,res) => {
         const movie = await Movie.findById(id)
             console.log("LLego aqui", movie)
         const movieName = movie.name
-        console.log("moviename",movieName)
+        const movieImg = movie.img
+        console.log(movie)
 
         const newOrder = {
         userId,
         movieName,
+        movieImg,
         movie
     }      
 

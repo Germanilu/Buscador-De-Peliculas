@@ -15,6 +15,9 @@ const orderSchema = new mongoose.Schema({
     movieName: {
         type: String 
     },
+    movieImg:{
+        type: String
+    },
     returnDate: {
         type: Date,
         default: +new Date() + 7*24*60*60*1000 
