@@ -1,5 +1,5 @@
 const User = require("../models/User");
-
+const bcrypt = require('bcrypt'); 
 const userController = {};
 
 //Metodo getAll
@@ -118,10 +118,17 @@ userController.update = async (req,res) => {
         }
 
         const {name,email,password,surname,address,city,age,mobile} = req.body
+
+        //Codificacion password       
+        const salt = await bcrypt.genSalt(10);
+        //Conecto a mi encryptedPassword el nuevo hash creado.
+        const encryptedPassword = await bcrypt.hash(password, salt);
+
+
         const updateUser = {
             name,
             email,
-            password,
+            password: encryptedPassword,
             surname,
             address,
             city,
@@ -133,6 +140,9 @@ userController.update = async (req,res) => {
 
         console.log(req.body)
         console.log(updateUser)
+
+
+        
        
     
        await User.findOneAndUpdate({_id:id},updateUser) 
