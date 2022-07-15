@@ -12,7 +12,7 @@ authController.register = async (req,res) => {
     
     try {
         // almaceno todo lo de req.body 
-        const {name, surname, address, city, email, password,age, mobile } = req.body  
+        const {name, surname, address, city, email, password, mobile } = req.body  
         
         //Validar campos introducidos (si falta algo no puedo crear el usuario)
         if(!name || !email || !password){
@@ -45,7 +45,6 @@ authController.register = async (req,res) => {
             city,
             email,
             password: encryptedPassword,
-            age,
             mobile
         }
 
@@ -118,7 +117,6 @@ authController.login = async (req,res) => {
             user_address: user.address,
             user_city: user.city,
             user_email: user.email,
-            user_age: user.age,
             user_mobile: user.mobile
         
         }, process.env.JWT_SECRET, { expiresIn: '5h' });

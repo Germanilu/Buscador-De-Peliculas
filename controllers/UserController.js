@@ -117,7 +117,7 @@ userController.update = async (req,res) => {
             )
         }
 
-        const {name,email,password,surname,address,city,age,mobile} = req.body
+        const {name,email,password,surname,address,city,mobile} = req.body
 
         //Codificacion password       
         const salt = await bcrypt.genSalt(10);
@@ -132,7 +132,6 @@ userController.update = async (req,res) => {
             surname,
             address,
             city,
-            age,
             mobile
         }
 

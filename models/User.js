@@ -27,10 +27,6 @@ const UserSchema = new mongoose.Schema({
         required: true,
         minLength: 6, 
     },
-    age:{
-        type:Number,
-        required: true
-    },
     mobile:{
         type: Number,
         required: true
