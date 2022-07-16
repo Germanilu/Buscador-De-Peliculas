@@ -98,8 +98,8 @@ orderController.getAll = async (req,res) => {
 
 orderController.getbyUserId = async (req,res) => {
     try {
-        const {userId} = req.body;
-        
+        const { userId } = req.params;
+        console.log(userId)
         
         const pedido = await Order.find({userId});
         
@@ -109,7 +109,7 @@ orderController.getbyUserId = async (req,res) => {
                 
                 {
                     success: false,
-                    message: "pedido Not Found by user ID"             
+                    message: "El usuario no tiene pedidos pendientes"             
                 }
             )
         }
