@@ -153,10 +153,45 @@ orderController.getMyOrder = async(req,res) => {
         return res.status(400).json(
             {
                 success: false,
-                message: 'ERROR'
+                message: 'Unable to get User Profile'
             }
         )
     }
 }
+
+
+
+orderController.deleteOrder = async(req,res) => {
+    try{
+        const filter = {
+            _id: req.params,
+            userId: req.user_id
+        };
+        console.log("soy filter",filter)
+        
+        const orderDeleted = await Order.findOneAndDelete(filter);
+        console.log(orderDeleted)
+
+        if(orderDeleted == null){
+            return res.status(500).json({
+                success: false,
+                message: "No pending orders"
+            })
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Delete order successfully",
+            data: orderDeleted
+            })
+    }catch (error){
+        return res.status(500).json({
+            success: false,
+            message: "Error detected",
+            data: error?.message || error
+        })
+    }
+}
+
+
 
 module.exports= orderController

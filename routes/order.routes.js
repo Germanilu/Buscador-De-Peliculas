@@ -10,6 +10,7 @@ router.post('/order/:id', verifyToken, orderController.create)
 router.get('/orders',verifyToken,isSuperAdmin, orderController.getAll)
 router.get('/orders/userOrder=:userId',verifyToken,isSuperAdmin, orderController.getbyUserId)
 router.get('/order/user=:user',verifyToken, orderController.getMyOrder)
+router.delete('/order/delete=:_id', verifyToken, orderController.deleteOrder)
 
 //Exportando router.
 module.exports = router;
