@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
+let now = moment()
 
 const orderSchema = new mongoose.Schema({
     
@@ -8,8 +10,8 @@ const orderSchema = new mongoose.Schema({
         required: true
     },
     orderDate: {
-        type: Date,
-        default: Date.now,
+        type: String,
+        default: () => moment().format("dddd, MMMM Do YYYY, h:mm:ss a"),
         required: true
     },
     movieName: {
